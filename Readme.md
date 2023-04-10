@@ -24,7 +24,7 @@ Add an event listener for the submit button to save the score and initials.
 
 
 ## Quiz Questions
-What are the different data types present in javascript?
+<!-- What are the different data types present in javascript?
 Explain Hoisting in javascript.
 Why do we use the word “debugger” in javascript?
 Difference between “ == “ and “ === “ operators.
@@ -81,8 +81,7 @@ Implement a function that returns an updated array with r right rotations on an 
 Write the code for dynamically inserting new components.
 Write the code given If two strings are anagrams of one another, then return true.
 Write the code to find the vowels
-In JavaScript, how do you turn an Object into an Array []?
-
+In JavaScript, how do you turn an Object into an Array []? -->
 
 1. What are the different data types present in javascript?
 2. Explain Hoisting in javascript.
