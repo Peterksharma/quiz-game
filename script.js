@@ -3,18 +3,43 @@ const nextButton = document.getElementById('next-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('questions')
 const answerButtonsElement = document.getElementById('answer-buttons')
+const timerElement = document.getElementById('timer')
 
-let shuffledQuestions, currentQuestionIndex //defaults both values to undfined
+var shuffledQuestions, currentQuestionIndex //defaults both values to undfined
+var timer;
 
 startButton.addEventListener('click', startGame)
 
-function startGame () {
+function startGame() {
     console.log('Quiz has been started');
     startButton.classList.add('hide');
-    shuffledQuestions = questions.sort(() => Math.random() - .5);
+    shuffledQuestions = questions.sort(() => Math.random() - 0.5);
     currentQuestionIndex = 0;
     questionContainerElement.classList.remove('hide');
-    setNextQuestion()
+    setNextQuestion();
+
+    // Add this block to start the timer when the game starts
+    let timeLeft = 20;
+    timerElement.textContent = `Time Left: ${timeLeft}s`;
+    timer = setInterval(() => {
+        timeLeft--;
+        timerElement.textContent = `Time Left: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            timerElement.textContent = 'Time is up!';
+            endGame();
+        }
+    }, 1000);
+}
+
+// Add a new function to end the game when the timer hits 0
+function endGame() {
+    questionContainerElement.classList.add('hide');
+    resetState();
+    startButton.innerText = 'Restart';
+    startButton.classList.remove('hide');
+    clearInterval(timer); // Clear the timer interval
+    timerElement.textContent = '';
 }
 
 function setNextQuestion() {

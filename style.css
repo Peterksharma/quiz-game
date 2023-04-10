@@ -101,4 +101,12 @@ body.wrong {
     padding: 5px 10px;
     outline: none;
   }
+
+.timer {
+    display: block;
+    margin-left: auto;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
   
