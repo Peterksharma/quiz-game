@@ -29,15 +29,6 @@ body.wrong {
     --hue: var(--hue-wrong)
 }
 
-/* .container {
-    width: 800px;
-    max-width: 80%;
-    background-color: white;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0 0 10px 2px;
-} */
-
 .container {
     display: flex;
     flex-direction: column;
@@ -107,10 +98,6 @@ body.wrong {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 100px;
-    height: auto;
-    border: 3px solid hsl(var(--hue), 100%, 40%);
-    border-radius: 5px;
     padding: 5px 10px;
     outline: none;
   }
