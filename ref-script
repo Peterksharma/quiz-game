@@ -1,0 +1,160 @@
+var quizArea = document.getElementById("quiz");
+var startBtn = document.getElementById("startBtn");
+
+var timerCount = 60;
+var score;
+
+var questions = [
+  {
+    question: "1st question",
+    answerChoices: ["1st answer choice", "2nd", "3rd", "4th"],
+    correctAnswer: "2nd"
+  },
+  {
+    question: "1st question",
+    answerChoices: ["1st answer choice", "2nd", "3rd", "4th"],
+    correctAnswer: "2nd"
+  },
+  {
+    question: "1st question",
+    answerChoices: ["1st answer choice", "2nd", "3rd", "4th"],
+    correctAnswer: "2nd"
+  },
+  {
+    question: "1st question",
+    answerChoices: ["1st answer choice", "2nd", "3rd", "4th"],
+    correctAnswer: "2nd"
+  },
+  {
+    question: "1st question",
+    answerChoices: ["1st answer choice", "2nd", "3rd", "4th", "5"],
+    correctAnswer: "2nd"
+  }
+]
+
+var currentQuestion = 0;
+
+function startGame(event) {
+  event.preventDefault();
+  // start the quiz!
+  // 1. Start timer
+  // 2. create a question
+  // 3. create answer choices
+  // 4. add event listeners to my answer choice buttons and that will validate whether they chose the right answer or not
+  // 5. move on to next question
+
+  // this function will start your timer
+  startTimer()
+  // this function will kick off rendering the question and answers to the page
+  generateQuestion();
+}
+
+function generateQuestion() {
+  var question = questions[currentQuestion].question;
+  // create an element (p, div)
+
+  // write into that element using our question variable (textContent)
+  
+  // append that question element into our quiz area (appendChild)
+
+  // generateAnswerChoices
+  generateAnswerChoices();
+}
+
+function generateAnswerChoices() {
+  // for loop i < questions[currentQuestion].answerChoices.length
+  // create an element (button)
+
+  // write into that element using our answerChoices variable (textContent)
+
+  // add event listener btn.addEventListener("click", validateAnswer)
+  
+  // append that question element into our quiz area (appendChild)
+
+}
+
+function validateAnswer(event) {
+  event.preventDefault();
+  // grab text of button that was clicked (event.target.textContent)
+
+  // conditional statement test userChoice === correctAnswer
+  // true
+  //    correct answer code
+  // false
+  //    incorrect answer
+  //    decrease timer by 10 secs
+  
+  // move onto the next question
+
+  // currentQuestion++
+  // conditional statement to check if you've reached the end of the questions array if(currentQuestion === questions.length)
+  // end the game (call endGame())
+    endGame()
+  // reset quiz area (quizArea.innerHTML = "", loop using .removeChild())
+
+  // call generateQuestion again to start on the next question
+  generateQuestion();
+}
+
+function startTimer() {
+    timer = setInterval(function() {
+      if (timeLeft > 1) {
+        // Set the `textContent` of `timerEl` to show the remaining seconds
+        timerEl.textContent = timeLeft + ' seconds remaining';
+        // Decrement `timeLeft` by 1
+        timeLeft--;
+      } else if (timeLeft === 1) {
+        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+        timerEl.textContent = timeLeft + ' second remaining';
+        timeLeft--;
+      } else {
+        // Once `timeLeft` gets to 0, set `timerEl` to an empty string
+        timerEl.textContent = '';
+        // Use `clearInterval()` to stop the timer
+        clearInterval(timer);
+        // Call the `endGame()` function
+        endGame();
+      }
+    }, 1000)
+  }
+  
+  function endGame() {
+    // Hide the quiz area by applying a 'hide' class or setting the display property to 'none'
+    quizArea.classList.add('hide');
+    
+    // Display the end game div by removing a 'hide' class or setting the display property to 'block'
+    endGameDiv.classList.remove('hide');
+  
+    // Calculate the score based on the remaining time or correct answers
+    score = timeLeft;
+  
+    // Display the score in the end game div
+    scoreDisplay.textContent = `Your score: ${score}`;
+  
+    // Retrieve the high score from localStorage and display it in the end game div
+    getScore();
+  }
+  
+  function saveScore(event) {
+    event.preventDefault();
+  
+    var scoreObj = {
+      intials: event.target.children[0].value,
+      score: timeLeft
+    };
+    
+    // Set the score into localStorage
+    localStorage.setItem("score", JSON.stringify(scoreObj));
+  }
+  
+  function getScore() {
+    // Get the high score from localStorage
+    var score = JSON.parse(localStorage.getItem("score"));
+  
+    // Display the high score in the end game div
+    highScoreDisplay.textContent = `High score: ${score.intials} - ${score.score}`;
+  }
+  
+  startBtn.addEventListener("click", startGame);
+  scoreForm.addEventListener("submit", saveScore);
+  
