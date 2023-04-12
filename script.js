@@ -168,7 +168,7 @@ function saveInitialsAndScore(initials, score) {
   
     var highScore = JSON.parse(localStorage.getItem("highScore"));
   
-    if (!highScore || scoreCount > highScore.score) {
+    if (!highScore || score > highScore.score) {
       localStorage.setItem("highScore", JSON.stringify(scoreObj));
       console.log(scoreObj.score + " this is the new high score");
     } else {
