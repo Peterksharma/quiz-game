@@ -15,7 +15,44 @@ var timeLeft = 20;
 var score;
 var scoreCount = 0
 
+var questions = [
+    {
+        question: 'What are the different data types present in javascript?',
+        answers: [
+            {text: 'Number, String, Boolean, Symbol, Undefined, Null, Object', correct: true},
+            {text: 'Integer, Float, String, Boolean, Object', correct: false},
+            {text: 'Number, String, Boolean, Array, Object', correct: false},
+            {text: 'Integer, Float, Character, Boolean, Object', correct: false}
+        ]
+    },
+    {
+        question: 'Explain Hoisting in javascript.',
+        answers: [
+            {text: 'Hoisting is a mechanism where variables and function declarations are moved to the top of their containing scope during the compilation phase.', correct: true},
+            {text: 'Hoisting is a technique for optimizing code execution by reordering statements.', correct: false},
+            {text: 'Hoisting is a feature that allows you to use variables before they are declared.', correct: false},
+            {text: 'Hoisting is a process where the interpreter moves all global and local variable declarations to the top of the script.', correct: false}
+        ]
+    },
+    {
+        question: 'Difference between “ == “ and “ === “ operators.',
+        answers: [
+            {text: '== compares values for equality with type coercion, while === compares values for equality without type coercion', correct: true},
+            {text: '== compares values for strict equality, while === compares values for loose equality', correct: false},
+            {text: '== compares values and data types, while === only compares values', correct: false},
+            {text: '== is used for comparison, while === is used for assignment', correct: false}
+        ]
+    }
+    
+]
 startButton.addEventListener('click', startGame)
+
+saveButton.addEventListener('click', saveInitialsAndScore)
+
+nextButton.addEventListener('click', () => {
+    currentQuestionIndex++
+    setNextQuestion()
+})
 
 function startGame() {
     console.log('Quiz has been started');
@@ -38,19 +75,6 @@ function startGame() {
             endGame();
         }
     }, 1000);
-}
-
-// Add a new function to end the game when the timer hits 0
-function endGame() {
-    questionContainerElement.classList.add('hide');
-    resetState();
-    nextButton.classList.add('hide');
-    startButton.innerText = 'Restart';
-    startButton.classList.remove('hide');
-    saveButton.classList.remove('hide');
-    timerElement.textContent = '';
-    clearInterval(timer); // Clear the timer interval
-    timeLeft = 20;
 }
 
 function setNextQuestion() {
@@ -100,11 +124,6 @@ function selectAnswer(e) {
     nextButton.classList.remove('hide')
 }
 
-nextButton.addEventListener('click', () => {
-    currentQuestionIndex++
-    setNextQuestion()
-})
-
 function setStatusClass(element, correct) {
     clearStatusClass(element)
     if (correct) {
@@ -119,36 +138,17 @@ function clearStatusClass(element) {
     element.classList.remove('wrong')
 }
 
-var questions = [
-    {
-        question: 'What are the different data types present in javascript?',
-        answers: [
-            {text: 'Number, String, Boolean, Symbol, Undefined, Null, Object', correct: true},
-            {text: 'Integer, Float, String, Boolean, Object', correct: false},
-            {text: 'Number, String, Boolean, Array, Object', correct: false},
-            {text: 'Integer, Float, Character, Boolean, Object', correct: false}
-        ]
-    },
-    {
-        question: 'Explain Hoisting in javascript.',
-        answers: [
-            {text: 'Hoisting is a mechanism where variables and function declarations are moved to the top of their containing scope during the compilation phase.', correct: true},
-            {text: 'Hoisting is a technique for optimizing code execution by reordering statements.', correct: false},
-            {text: 'Hoisting is a feature that allows you to use variables before they are declared.', correct: false},
-            {text: 'Hoisting is a process where the interpreter moves all global and local variable declarations to the top of the script.', correct: false}
-        ]
-    },
-    {
-        question: 'Difference between “ == “ and “ === “ operators.',
-        answers: [
-            {text: '== compares values for equality with type coercion, while === compares values for equality without type coercion', correct: true},
-            {text: '== compares values for strict equality, while === compares values for loose equality', correct: false},
-            {text: '== compares values and data types, while === only compares values', correct: false},
-            {text: '== is used for comparison, while === is used for assignment', correct: false}
-        ]
-    }
-    
-]
+function endGame() {
+    questionContainerElement.classList.add('hide');
+    resetState();
+    nextButton.classList.add('hide');
+    startButton.innerText = 'Restart';
+    startButton.classList.remove('hide');
+    saveButton.classList.remove('hide');
+    timerElement.textContent = '';
+    clearInterval(timer); // Clear the timer interval
+    timeLeft = 20;
+}
 
 function getScore() {
     var highScore = JSON.parse(localStorage.getItem("highScore"));
@@ -160,25 +160,20 @@ function getScore() {
     scoreForm.classList.remove('hide');
 }
 
-function saveScore(event) {
-    event.preventDefault();
-  
+function saveInitialsAndScore(initials, score) {
     var scoreObj = {
-      intials: event.target.children[0].value,
-      score: scoreCount
+      initials: initials,
+      score: score
     };
-
+  
     var highScore = JSON.parse(localStorage.getItem("highScore"));
-
+  
     if (!highScore || scoreCount > highScore.score) {
-        localStorage.setItem("highScore", json.stringify(scoreObj));
-        console.log(scoreObj.score + " this is the new high score");
+      localStorage.setItem("highScore", JSON.stringify(scoreObj));
+      console.log(scoreObj.score + " this is the new high score");
     } else {
-        console.log('This score is not higher that high score.')
+      console.log('This score is not higher than the high score.');
     }
-    getScore()
-    event.target.children[0].value = "";
-}
-
-
-scoreForm.addEventListener("submit", saveScore);
+    getScore();
+  }
+  
