@@ -11,7 +11,9 @@
     <div class="container">
         <img src="icon.png" class="images" alt="A description of the icon">
         <div id="question-container" class="hide">
-            <p id="timer" class="timer">Timer</p>
+            <p id="timer" class="timer"></p>
+            <p id="score-display"></p>
+            <p id="high-score-display"></p>
             <div id="questions">Questions</div>
             <div id="answer-buttons" class="btn-grid">
                 <button class="btn">Answer 1</button>
@@ -19,10 +21,14 @@
                 <button class="btn">Answer 3</button>
                 <button class="btn">Answer 4</button>
             </div>
+            <p id="score-display"></p>
+            <p id="high-score-display"></p>
         </div>
         <div class="controls">
+            <form id="score-form" class="score-form"></form>
             <button id="start-btn" class="start-btn btn">Start</button>
             <button id="next-btn" class="next-btn btn hide">Next</button>
+            <button id="save-btn" class="save-btn btn hide">Save Score</button>
         </div>
     </div>
     <script src="./script.js"></script>

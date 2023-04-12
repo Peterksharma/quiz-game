@@ -137,24 +137,23 @@ function startTimer() {
   
   function saveScore(event) {
     event.preventDefault();
+    console.log('sumbit script is working')
   
     var scoreObj = {
       intials: event.target.children[0].value,
       score: timeLeft
     };
     
-    // Set the score into localStorage
     localStorage.setItem("score", JSON.stringify(scoreObj));
   }
   
   function getScore() {
-    // Get the high score from localStorage
     var score = JSON.parse(localStorage.getItem("score"));
-  
-    // Display the high score in the end game div
-    highScoreDisplay.textContent = `High score: ${score.intials} - ${score.score}`;
+      highScoreDisplay.textContent = `High score: ${score.intials} - ${score.score}`;
   }
   
   startBtn.addEventListener("click", startGame);
   scoreForm.addEventListener("submit", saveScore);
+
+
   

@@ -1,32 +1,40 @@
-const startButton = document.getElementById('start-btn')
-const nextButton = document.getElementById('next-btn')
-const questionContainerElement = document.getElementById('question-container')
-const questionElement = document.getElementById('questions')
-const answerButtonsElement = document.getElementById('answer-buttons')
-const timerElement = document.getElementById('timer')
+var startButton = document.getElementById('start-btn')
+var nextButton = document.getElementById('next-btn')
+var questionContainerElement = document.getElementById('question-container')
+var questionElement = document.getElementById('questions')
+var answerButtonsElement = document.getElementById('answer-buttons')
+var timerElement = document.getElementById('timer')
+var saveButton = document.getElementById('save-btn')
+var scoreDisplay = document.getElementById('score-display')
+var highScoreDisplay = document.getElementById('high-score-display')
+var scoreForm = document.getElementById('score-form')
 
 var shuffledQuestions, currentQuestionIndex //defaults both values to undfined
 var timer;
+var timeLeft = 20;
+var score;
+var scoreCount = 0
 
 startButton.addEventListener('click', startGame)
 
 function startGame() {
     console.log('Quiz has been started');
     startButton.classList.add('hide');
+    saveButton.classList.add('hide');
     shuffledQuestions = questions.sort(() => Math.random() - 0.5);
     currentQuestionIndex = 0;
     questionContainerElement.classList.remove('hide');
     setNextQuestion();
 
-    // Add this block to start the timer when the game starts
-    let timeLeft = 20;
+    if (timer) {
+        clearInterval(timer);
+    }
     timerElement.textContent = `Time Left: ${timeLeft}s`;
     timer = setInterval(() => {
         timeLeft--;
         timerElement.textContent = `Time Left: ${timeLeft}s`;
         if (timeLeft <= 0) {
             clearInterval(timer);
-            timerElement.textContent = 'Time is up!';
             endGame();
         }
     }, 1000);
@@ -36,21 +44,22 @@ function startGame() {
 function endGame() {
     questionContainerElement.classList.add('hide');
     resetState();
+    nextButton.classList.add('hide');
     startButton.innerText = 'Restart';
     startButton.classList.remove('hide');
-    clearInterval(timer); // Clear the timer interval
+    saveButton.classList.remove('hide');
     timerElement.textContent = '';
+    clearInterval(timer); // Clear the timer interval
+    timeLeft = 20;
 }
 
 function setNextQuestion() {
+    scoreCount++;
     if (currentQuestionIndex < shuffledQuestions.length) {
         resetState();
         showQuestion(shuffledQuestions[currentQuestionIndex]);
     } else {
-        questionContainerElement.classList.add('hide');
-        startButton.innerText = 'Restart';
-        startButton.classList.remove('hide');
-        nextButton.classList.add('hide');
+        endGame();
     }
 }
 
@@ -110,7 +119,7 @@ function clearStatusClass(element) {
     element.classList.remove('wrong')
 }
 
-const questions = [
+var questions = [
     {
         question: 'What are the different data types present in javascript?',
         answers: [
@@ -140,3 +149,36 @@ const questions = [
     }
     
 ]
+
+function getScore() {
+    var highScore = JSON.parse(localStorage.getItem("highScore"));
+    if (highScore) {
+        highScoreDisplay.textContent = `High Score: ${highScore.initials} - ${highScore.score}`;
+    } else {
+        highScoreDisplay.textContent = 'No high score yet';
+    }
+    scoreForm.classList.remove('hide');
+}
+
+function saveScore(event) {
+    event.preventDefault();
+  
+    var scoreObj = {
+      intials: event.target.children[0].value,
+      score: scoreCount
+    };
+
+    var highScore = JSON.parse(localStorage.getItem("highScore"));
+
+    if (!highScore || scoreCount > highScore.score) {
+        localStorage.setItem("highScore", json.stringify(scoreObj));
+        console.log(scoreObj.score + " this is the new high score");
+    } else {
+        console.log('This score is not higher that high score.')
+    }
+    getScore()
+    event.target.children[0].value = "";
+}
+
+
+scoreForm.addEventListener("submit", saveScore);
