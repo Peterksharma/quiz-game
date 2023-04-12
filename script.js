@@ -146,7 +146,7 @@ function endGame() {
     saveButton.classList.remove('hide');
     timerElement.textContent = '';
     clearInterval(timer); // Clear the timer interval
-    timeLeft = 20;
+    timeLeft = 20; 
 }
 
 function getScore() {
@@ -156,7 +156,6 @@ function getScore() {
     } else {
         highScoreDisplay.textContent = 'No high score yet';
     }
-    scoreForm.classList.remove('hide');
 }
 
 function saveInitialsAndScore(initials, score) {

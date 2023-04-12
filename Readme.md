@@ -36,17 +36,22 @@ Before you begin, ensure you have met the following requirements:
 
 ### <span style="color:grey;">**Logic Followed**</span> 
 
+
+#### Create the HTML structure:
 ```
-Create the HTML structure:
 - Create a container for the quiz.
 - Add a title and description.
 - Add a start button.
 - Add a container for questions, which will be populated dynamically.
 - Add a container for the results, including a form for initials and a submit button.
-Create CSS styles:
+```
+#### Create CSS styles:
+```
 - Style the quiz container, title, description, buttons, and question container.
 - Add responsive design styles for different screen sizes.
-JavaScript Functionality: 
+```
+#### JavaScript Functionality: 
+```
 - Create an array of objects containing questions, choices, and the correct answer.
 - Add an event listener for the start button to start the quiz.
 - Create a function to start the timer and display the first question.
@@ -58,20 +63,6 @@ JavaScript Functionality:
 - Create a function to save the score and initials to local storage.
 - Add an event listener for the submit button to save the score and initials.
 ```
----
-
-### **Acceptance Criteria...**
-
-|<span style="color:lightgreen;">**I Want...**</span>                 |<span style="color:lightgreen;">**So that...**</span>                                 |
-|--------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-|to take a timed quiz on JavaScript fundamentals that stores high scores | I can I can gauge my progress compared to my peers                       |
-
-
-|<span style="color:red;">**When...**</span>                         |<span style="color:red;">**Then...**</span>                                   |
-|----------------------------------------------------------------------|--------------------------------------------------------------                      |
-| I click the button to generate a password                            | I am presented with a series of prompts for password criteria                      |
-
-
 
 --- 
 
