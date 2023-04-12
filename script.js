@@ -1,3 +1,4 @@
+//Variable Corner
 var startButton = document.getElementById('start-btn')
 var nextButton = document.getElementById('next-btn')
 var questionContainerElement = document.getElementById('question-container')
@@ -44,6 +45,8 @@ var questions = [
     }
     
 ]
+
+//Click click Click
 startButton.addEventListener('click', startGame)
 
 saveButton.addEventListener('click', saveInitialsAndScore)
@@ -53,6 +56,9 @@ nextButton.addEventListener('click', () => {
     setNextQuestion()
 })
 
+//Funtion Junction
+//----------------------------------
+//funtion that starts the game
 function startGame() {
     console.log('Quiz has been started');
     startButton.classList.add('hide');
@@ -76,6 +82,7 @@ function startGame() {
     }, 1000);
 }
 
+//function that calls the next question and increase the score
 function setNextQuestion() {
     scoreCount++;
     if (currentQuestionIndex < shuffledQuestions.length) {
@@ -86,6 +93,7 @@ function setNextQuestion() {
     }
 }
 
+//function that shows the next question from random
 function showQuestion(question) {
     questionElement.innerText = question.question;
 
@@ -137,6 +145,7 @@ function clearStatusClass(element) {
     element.classList.remove('wrong')
 }
 
+//function that ends the game. hide buttons not needed and changes the text on the start button.
 function endGame() {
     questionContainerElement.classList.add('hide');
     resetState();
@@ -158,6 +167,7 @@ function getScore() {
     }
 }
 
+//gets the high score and compares it to the high score and updates if the score is higher.
 function saveInitialsAndScore(initials, score) {
     var scoreObj = {
       initials: initials,
