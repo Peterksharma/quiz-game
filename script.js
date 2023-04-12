@@ -6,8 +6,7 @@ var answerButtonsElement = document.getElementById('answer-buttons')
 var timerElement = document.getElementById('timer')
 var saveButton = document.getElementById('save-btn')
 var scoreDisplay = document.getElementById('score-display')
-var highScoreDisplay = document.getElementById('high-sc-dsp')
-var scoreForm = document.getElementById('score-form')
+var highScoreDisplay = document.getElementById('top-score')
 
 var shuffledQuestions, currentQuestionIndex //defaults both values to undfined
 var timer;
